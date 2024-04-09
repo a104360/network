@@ -1,0 +1,28 @@
+CC = gcc
+CFLAGS = -Wall -g -pedantic -I$(IDIR)
+IDIR = include
+
+SRC = $(wildcard src/*.c)
+
+DEPS = $(wildcard $(IDIR)/*.h)
+LIBS = $(patsubst %,$(IDIR)/%,$(DEPS)) 
+
+ODIR = obj
+_OBJ = $(wildcard $(ODIR)/*.o)
+OBJS = $(patsubst %,$(ODIR)/%,%(_OBJ))
+
+EXES = $(SRC:.c=.o)
+
+.PHONY: clean all
+
+all: $(EXES)
+
+$(ODIR)/%.o: src/%.c $(LIBS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+%: $(ODIR)/%.o
+	$(CC) -o $@ $^ $(CFLAGS)
+
+
+clean: 
+	rm $(EXES)
