@@ -65,39 +65,40 @@ static int stringToInt(char *str) {
 
 int main(){
 	const char fifo[11] = "./tmp/fifo";
-	if(mkfifo("./tmp/fifo",0666) == -1) perror("Fifo não foi criado corretamente");
-	
-	int server = open(fifo,O_RDONLY);
+	int server;
+	if((server = open(fifo,O_RDONLY)) == -1){
+		if(mkfifo("./tmp/fifo",0666) == -1) perror("Fifo não foi criado corretamente");
+	}
+	server = open(fifo,O_RDONLY);
 
 	//printf("Não executa mais nada até o cliente abrir para escrever");
-	char buffer[128];
-	read(server,&buffer,sizeof(buffer));
-	
-	//close(server);
-
-	printf("%s",buffer);
+	int buffer;
+	read(server,&buffer,sizeof(int));
 	
 	close(server);
+
+	printf("Resultado recebido : %d\n",buffer);
+
+	buffer = repetitions(buffer);
+
+	printf("Resultado a enviar : %d\n",buffer);
 	
-	int n = stringToInt(buffer);
+	int reply;
 
-	n = repetitions(n);
+	if((reply = open("./tmp/reply",O_WRONLY)) == -1){
+		if(mkfifo("./tmp/reply",0666) == -1) perror("reply fifo não foi criado");
+
+		reply = open("./tmp/reply",O_WRONLY);
+	}
 	
-	printf("%d",n);
-	/*
-	mkfifo("./tmp/reply",0666);
 
-	int reply = open("./tmp/reply",O_WRONLY);
 
-	write(reply,&n,sizeof(n));
+	write(reply,&buffer,sizeof(buffer));
 
 	close(reply);
 
-	char end = '\0';
-	
-	write(reply,&end,sizeof(end));
+	unlink(fifo);
+	unlink("./tmp/reply");
 
-	close(server);
-	*/
 	return 0;
 }
