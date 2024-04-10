@@ -10,4 +10,7 @@ all: $(EXES)
 	$(CC) $(CFLAGS) $< -o $@
 
 clean: 
-	rm $(EXES) fifo
+	rm $(EXES) $(fifos)
+
+fifos: tmp/*
+	rm temp/*
