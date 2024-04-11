@@ -64,12 +64,10 @@ static int stringToInt(char *str) {
 
 
 int main(){
-	const char fifo[11] = "./tmp/fifo";
 	int server;
-	if((server = open(fifo,O_RDONLY)) == -1){
-		if(mkfifo("./tmp/fifo",0666) == -1) perror("Fifo não foi criado corretamente");
-	}
-	server = open(fifo,O_RDONLY);
+	mkfifo("tmp/fifo",0666);
+	mkfifo("tmp/reply",0666);
+	server = open("tmp/fifo",O_RDONLY);
 
 	//printf("Não executa mais nada até o cliente abrir para escrever");
 	int buffer;
@@ -85,20 +83,11 @@ int main(){
 	
 	int reply;
 
-	if((reply = open("./tmp/reply",O_WRONLY)) == -1){
-		if(mkfifo("./tmp/reply",0666) == -1) perror("reply fifo não foi criado");
-
-		reply = open("./tmp/reply",O_WRONLY);
-	}
-	
-
+	reply = open("tmp/reply",O_WRONLY);
 
 	write(reply,&buffer,sizeof(buffer));
 
 	close(reply);
-
-	unlink(fifo);
-	unlink("./tmp/reply");
 
 	return 0;
 }

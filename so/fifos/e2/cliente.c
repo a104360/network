@@ -8,7 +8,7 @@
 
 int main(int argc,char ** argv){
 	
-	const char fifo[11] = "./tmp/fifo";
+	const char fifo[] = "./tmp/fifo";
 	
 	int request = open(fifo,O_WRONLY);
 	

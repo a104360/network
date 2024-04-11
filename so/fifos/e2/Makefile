@@ -9,8 +9,8 @@ all: $(EXES)
 %: %.c
 	$(CC) $(CFLAGS) $< -o $@
 
-clean: $(fifos) 
-	rm $(EXES) $(fifos)
+clean:  
+	rm $(EXES) tmp/*
 
 fifos: tmp/*
 	rm tmp/*
