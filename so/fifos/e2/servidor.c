@@ -36,7 +36,7 @@ static int repetitions(int n){
 
 
 
-static int stringToInt(char *str) {
+/*static int stringToInt(char *str) {
     int result = 0;
     int i = 0;
 
@@ -59,14 +59,17 @@ static int stringToInt(char *str) {
     }
 
     return result * sign;
-}
+}*/
 
 
 
 int main(){
+	if(fork() == 0){
+
 	int server;
-	mkfifo("tmp/fifo",0666);
-	mkfifo("tmp/reply",0666);
+
+	mkfifo("tmp/fifo",0666); // Criar fifo de request
+	mkfifo("tmp/reply",0666); // Criar fifo de reply
 	server = open("tmp/fifo",O_RDONLY);
 
 	//printf("Não executa mais nada até o cliente abrir para escrever");
@@ -75,11 +78,11 @@ int main(){
 	
 	close(server);
 
-	printf("Resultado recebido : %d\n",buffer);
+	//printf("Resultado recebido : %d\n",buffer);
 
 	buffer = repetitions(buffer);
 
-	printf("Resultado a enviar : %d\n",buffer);
+	//printf("Resultado a enviar : %d\n",buffer);
 	
 	int reply;
 
@@ -88,6 +91,9 @@ int main(){
 	write(reply,&buffer,sizeof(buffer));
 
 	close(reply);
-
+	
+	_exit(0);
+	perror("Não eliminou corretamente");
+	}
 	return 0;
 }

@@ -6,14 +6,12 @@
 #include <unistd.h>
 
 
-static char * concat(char ** argv){
+/*static char * concat(char ** argv){
 	
-}
+}*/
 
 
 int main(int argc,char ** argv){
 	
-	for(int i = 0;i < )
-
 	return 0;
 }
