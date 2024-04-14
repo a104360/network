@@ -1,21 +1,20 @@
 #include "../include/request.h"
-#include "../include/command.h"
 #include <string.h>
 #include <stdlib.h>
 
 typedef struct request {
     int id;
     int time;
-    Command ** commands;
+    char ** commands;
     int argc;
 };
 
-Request * createRequest(int id,int time,Command ** commands,int argc){
+Request * createRequest(int id,int time,char ** commands,int argc){
     Request * request = malloc(sizeof(struct request));
     request->id = id;
     request->time = time;
     request->argc = argc;
-    request->commands = malloc(sizeof(Command *));
+    request->commands = malloc(sizeof(char *) * argc);
     for(int i = 0;i < argc;i++){
         request->commands = copyCommand(commands[i]);        
     }

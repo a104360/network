@@ -1,13 +1,10 @@
+#define EXECUTE 5
+#define STATUS 2
 
-#define EXE 1
-#define TIME 2
-#define TSIZE 300
+char * parseUniqueCommand(const char *);
 
-/**
- * @param argc number of arguments
- * @param argv array of arguments to parse
- * @param index from which element of the array to 
- * start parsing
- * @note Allocation of memory, free needed 
-*/
-char * parseCommand(int,char **,int);
+char ** parseMultipleCommands(const char *);
+
+int stringToInt(char *);
+
+int countCommands(const char *);

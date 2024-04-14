@@ -1,4 +1,5 @@
-#include "../include/command.h"
+#define EXECUTE 5
+#define STATUS 2
 
 /// @brief Struct para definir um pedido do cliente
 typedef struct request Request;
@@ -9,7 +10,7 @@ typedef struct request Request;
 /// @param  argv array de argumentos passados ao cliente pelo utilizador
 /// @param  argc numero de elementos do array de argumentos
 /// @return Pointer para o request criado
-Request *createRequest(int, int,Command **, int);
+Request *createRequest(int, int,char **, int);
 
 /// @brief Getter id pedido
 /// @param  request Pointer para o request
@@ -24,7 +25,7 @@ int getRtime(Request *);
 /// @brief Getter dos comandos
 /// @param  request Pointer para o request
 /// @return Array com os comandos a executar
-Command ** getCommands(Request *);
+char ** getCommands(Request *);
 
 /// @brief Getter numero de comandos
 /// @param  request Pointer para o request
