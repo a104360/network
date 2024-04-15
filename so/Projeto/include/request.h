@@ -1,6 +1,8 @@
 #define EXECUTE 5
 #define STATUS 2
 
+typedef char * Command;
+
 /// @brief Struct para definir um pedido do cliente
 typedef struct request Request;
 
@@ -10,7 +12,7 @@ typedef struct request Request;
 /// @param  argv array de argumentos passados ao cliente pelo utilizador
 /// @param  argc numero de elementos do array de argumentos
 /// @return Pointer para o request criado
-Request *createRequest(int, int,char **, int);
+Request *createRequest(int, int,Command *, int);
 
 /// @brief Getter id pedido
 /// @param  request Pointer para o request
@@ -35,3 +37,9 @@ int getNCommands(Request *);
 /// @brief Função de desalocação de memória para o request
 /// @param  request Pointer para o request
 void destroyRequest(Request *);
+
+/// @brief Função para enviar o request para um fifo
+/// @param  fifo File descriptor do fifo para o qual o Request vai ser escrito
+/// @param  request Pointer para o Request a ser escrito no fifo
+/// @return 0 -> sucesso || -1 -> erro
+int writeRequest(int,Request *);

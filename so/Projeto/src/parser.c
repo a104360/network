@@ -1,6 +1,11 @@
 #include "../include/parser.h"
+#include <unistd.h>
+#include <fcntl.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
+
+
 
 /*static char * concat(int argc,char ** argv, int start,int end){
     if(argc == 0) return NULL;
@@ -46,7 +51,7 @@ int countCommands(const char *argv) {
 }
 
 // Apresenta o comando na posicao N da pipeline de comandos
-static int getIndexNCommand(char *argv, int n) {
+static int getIndexNCommand(const char *argv, int n) {
     if (n == 0)
         return 0;
     int size = strlen(argv);
@@ -62,7 +67,7 @@ static int getIndexNCommand(char *argv, int n) {
 }
 
 // Separa cada comando do pipeline por ordem 
-static char *cmdtok(char *argv, int start, char *saveptr) {
+static char *cmdtok(const char *argv, int start, char *saveptr) {
     if (argv == NULL)
         return NULL;
     char *copy = strdup(argv + start); // Start from the given position
@@ -83,11 +88,27 @@ char ** parseMultipleCommands(const char * argv){
     char ** args = malloc(sizeof(char *) * max);
     char * saveptr = NULL;
     for(int i = 0;i < max;i++){
-        args[i] = cmdtok(argv,getIndexNCommand(argv,i),&saveptr);
+        args[i] = cmdtok(argv,getIndexNCommand(argv,i),saveptr);
     }
     return args;
 }
 
+void getReply(int fd,char * reply){
+
+    lseek(fd,0,SEEK_SET);
+    char buffer[BUFFERSIZE];
+
+    int offset = 0;
+    int n;
+
+    while((n = read(fd,buffer,BUFFERSIZE))){
+        offset += n;
+        snprintf(reply+offset,offset,"%s",buffer);
+    }
+    
+}
+
+/*
 int stringToInt(char * argv){
     int result = 0;
     int i = 0;
@@ -112,3 +133,4 @@ int stringToInt(char * argv){
 
     return result * sign;
 }
+*/
