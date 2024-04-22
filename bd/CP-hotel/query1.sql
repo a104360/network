@@ -1,3 +1,5 @@
+
+
 -- Insert sample data into morada table
 INSERT INTO morada (rua, localidade, codigoPostal) VALUES
 ('Rua da Amizade', 'Lisbon', '1000-001'),
@@ -28,4 +30,14 @@ INSERT INTO quarto (npax, tipo, estado, idHotel) VALUES
 ('Double', 'Suite', 1, 2),
 ('Single', 'Standard', 1, 3);
 
-select cliente.nome,cliente.morada,contacto.valor from cliente inner join contacto on cliente.morada=contacto.idCliente
+INSERT INTO funcionario (nome , funcao , idHotel) values
+('Jipow' , 'Rececionista' , '1'), 
+('Antonio','Limpeza','1'),
+('Cassandra','Hacker','2'),
+('Josefino','Servidores','2'),
+('Aristides','Faztudo','3');
+
+-- select * from quarto;
+-- update quarto set estado = 1 where idHotel = 3;
+
+-- select cliente.nome,cliente.morada,contacto.valor from cliente inner join contacto on cliente.morada=contacto.idCliente

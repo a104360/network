@@ -40,10 +40,21 @@ foreign key (idHotel) references hotel(identificador)
 
 create table if not exists quarto(
 num int not null auto_increment,
-npax varchar(69) not null,
+npax varchar(69),
 tipo varchar(45),
 estado binary not null,
 idHotel int not null,
 primary key (num),
 foreign key (idHotel) references hotel(identificador)
 );
+
+create table if not exists funcionario(
+idFuncionario int not null auto_increment,
+nome varchar(70),
+funcao varchar(45),
+idHotel int not null,
+primary key (idFuncionario),
+foreign key (idHotel) references hotel(identificador)
+);
+
+select * from funcionario;
