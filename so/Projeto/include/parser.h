@@ -23,5 +23,5 @@ void getReply(int,char *);
 /// @brief Conta quantos comandos existem no argumento passado 
 /// ao cliente
 /// @param  argv Argumento com comandos passado ao cliente pelo utilizador
-/// @return 
+/// @return Nº de comandos presentes no argumento
 int countCommands(const char *);

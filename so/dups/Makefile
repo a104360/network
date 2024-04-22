@@ -2,10 +2,13 @@ src = $(wildcard ./*.c)
 obj = $(src:.c=.o)
 exe = $(obj:.o=)
 
-all: $(exe) 
+all: $(exe) $(obj) 
+
+%.o: %.c
+	gcc -Wall -g -c $< -o $@
 
 %: %.o
-	gcc -Wall $< -o $@
+	gcc -g -Wall $< -o $@
 
 clean: 
-	rm $(exe)
+	rm $(exe) $(obj)
