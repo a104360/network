@@ -1,7 +1,14 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+
 
 public class Fitness {
     private Map<String,Utilizador> db;
@@ -67,8 +74,111 @@ public class Fitness {
                 todas.add(at.clone());
             }
         }
-
         return todas;
     }
 
+    public void adiciona(String email,Set<Atividade> activs){
+        Utilizador u = this.db.get(email);
+        for(Atividade ac : activs){
+            u.addAtividade(ac);
+        }
+    }
+
+    public Atividade atividadeMaisExigente(){
+        Atividade a = null;
+        double max = 0;
+        for(Utilizador user : this.db.values()){
+            for(Atividade aCiclo : user.getAtividades().values()){
+                double calAtividade = a.calorias();
+                if(max < calAtividade){
+                    max = calAtividade;
+                    a = aCiclo;
+                }
+            }
+        }
+        return a;
+    }
+
+    public Utilizador utilizadorMaisAtivo(){
+        Utilizador u = null;
+        double max = 0;
+        for(Utilizador user : this.db.values()){
+            double consumidas = user.getAtividades().values().stream().mapToDouble(x->x.calorias()).sum();
+            if(consumidas > max) {
+                max = consumidas;
+                u = user.clone();
+            }
+        }
+        return u;
+    }
+
+    public void actualizaDesportoFav(){
+        for(Utilizador u : this.db.values()){
+
+            Map<Atividade,Integer> atividadeMap = new TreeMap<>();
+            for(Atividade a : u.getAtividades().values()){
+                atividadeMap.put(a.clone(),atividadeMap.getOrDefault(a.getCodigo(),0) + 1);                
+            }
+
+            int maxCount = 0;
+            Atividade favoriteSport = null;
+            for (Map.Entry<Atividade, Integer> entry : atividadeMap.entrySet()) {
+                if (entry.getValue() > maxCount) {
+                    maxCount = entry.getValue();
+                    favoriteSport = entry.getKey();
+                }
+            }
+            
+            u.setDesporto_favorito(favoriteSport.getCodigo());
+        }
+    }
+
+    public Utilizador utilizadorComMaisRegistos(){
+        Utilizador rei = null;
+        int registosMax = 0;
+
+        for(Utilizador u : this.db.values()){
+
+            int n = u.getAtividades().values().stream().mapToInt(x->1).sum();
+            if(n > registosMax){
+                registosMax = n;
+                rei = u.clone();
+            }
+
+        }
+        return rei;
+    }
+    
+    public Set<Utilizador> ordenarUtilizadoresSet(){
+        Set<Utilizador> sortedUsers = new TreeSet<>(Comparator.comparing(Utilizador::caloriasUtilizador).thenComparing(Utilizador::getNome));
+        sortedUsers.addAll(this.db.values());
+        return sortedUsers;
+    }
+
+    public List<Utilizador> ordenarUtilizadoresList(){
+        List<Utilizador> sortedUsers = new ArrayList<>(this.db.values());
+        sortedUsers.sort(Comparator.comparing(Utilizador::caloriasUtilizador).thenComparing(Utilizador::getNome));
+        return sortedUsers;
+    }
+
+    public List<Utilizador> ordenarUtilizadorList(Comparator<Utilizador> c){
+        List<Utilizador> sortedUsers = new ArrayList<>(this.db.values());
+        sortedUsers.sort(c);
+        return sortedUsers;
+    }
+
+    public Iterator<Utilizador> ordenarUtilizador(String criterio) throws NoSuchMethodException{
+        if(criterio.compareToIgnoreCase("ascendente") == 0) return new AscendenteIter(new ArrayList<>(this.db.values()));
+        if(criterio.compareToIgnoreCase("descendente") == 0) return new DescendenteIter(new ArrayList<>(this.db.values()));
+        throw new NoSuchMethodException();
+    }
+
+    public Map<String, List<Utilizador>> podiumPorActiv(){
+        Map<String,List<Utilizador>> podium = new HashMap<>();
+        // Corrida 
+        
+        // Canoagem 
+        // Abdominais
+    }
+    
 }

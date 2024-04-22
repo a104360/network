@@ -154,6 +154,10 @@ public class Utilizador {
                 this.data_nascimento);
     }
 
+    public double caloriasUtilizador(){
+        return this.atividades.values().stream().mapToDouble(x->x.calorias()).sum();
+    }
+
     /**
      * Esta implementaÃ§Ã£o de equals Ã© diferente daquela que temos feito, no que respeita
      * Ã s comparaÃ§Ãµes das vÃ¡rias variÃ¡veis de instÃ¢ncia.
