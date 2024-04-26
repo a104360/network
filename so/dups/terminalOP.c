@@ -7,19 +7,6 @@
 #include <ctype.h>
 
 typedef char * Command;
-
-
-// Conta quantos comandos existem no pipeline passado como argumento
-/*int countCommands(const char * cmd) {
-    if(!cmd || cmd[0] == '\0') return 0;
-    int count = 1;
-    for(int i = 0;cmd[i] != '\0';i++){
-        if(cmd[i] == '|' && cmd[i+1] >= ' ' && cmd[i+1] <= '~') 
-            count++;
-    }
-    return count;
-}*/
-
 // Apresenta o comando na posicao N da pipeline de comandos
 static int getIndexNCommand(const char *argv, int n) {
     if (n == 0)
@@ -162,79 +149,7 @@ static void freeCmdTok(char ** tok) {
     free(tok);
 }
 
-/*
-int main()
-{
-    const char comandofixo[] = "\n";
-    int size = countTokens(comandofixo);
-    printf("ls -l /etc : %d\n",size);
-    
-    char ** comando = parseCmdTok(comandofixo);
-    if(!comando){
-        perror("Nao ha comando");
-        return 1;
-    }
-    for(int i = 0; i < size;i++){
-        printf("argumento %d : %s\n",i,comando[i]);
-    }
-    
-    for(int i = 0; i < size;i++){
-        free(comando[i]);
-    }
-    free(comando);
-    return 0;
-}
-*/
 
-/*static int indexCommandN(int argc,char ** argv,int index){
-    int commandsCounter = 0;
-    for(int i = 0; i < argc && commandsCounter != index;i++){
-        if(strcmp(argv[i],"|") == 0) commandsCounter++;
-    }
-    return commandsCounter;
-}
-
-static int endCommandN(int argc,char ** argv,int index){
-    int start = indexCommandN(argc,argv,index);
-    if(start + 1 < )
-}
-
-static char * command(int argc,char ** argv,int index){
-    int commandIndex = indexCommandN(argc,argv,index);
-
-}
-
-/// @brief contar comandos
-/// @param argc Deve ser o argc da main - 1
-/// @param argv argv da main normal
-/// @return numero de comandos
-static int countCommands(int argc, char ** argv){
-    int count = 1;
-    for(int i = 0;i < argc;i++){
-        if(strcmp("|",argv[i]) == 0) count++;
-    }
-    return count;
-}*/
-
-int main(){
-    const char p1[] = "ls";
-    const char p2[] = "wc -l";
-    const char p3[] = "ls | wc -l|fafa";
-
-    printf("Numero de comandos nos pipes : \n1º : %d\n2º : %d\n3º : %d\n",countCommands(p1),countCommands(p2),countCommands(p3));
-
-    char *** pipeline = parsePipe(p3);
-
-    for(int i = 0;pipeline[i] != NULL;i++){
-        printCmds(pipeline[i]);
-        freeCmdTok(pipeline[i]);
-    }
-    free(pipeline); 
-    
-}
-
-
-/******  EXECUTAR ESTE PARA TESTAR ******
    
 int main(int argc,char ** argv){
 
@@ -242,7 +157,7 @@ int main(int argc,char ** argv){
     {
     case 1:
         //perror("Não foram inseridos argumentos suficientes");
-        char ** comandoPrimal = parseCmdTok("ls -l .");
+        char ** comandoPrimal = cmdTok("ls -l .");
         if(fork() == 0){
             execvp(comandoPrimal[0],comandoPrimal);
             perror("exec correu mal");
@@ -256,41 +171,44 @@ int main(int argc,char ** argv){
     default:
         int n = countCommands(argv[1]);
         if(n <= 0){
-            return 0;
+            perror("Não introduziu comandos validos\n");
+            return -1;
         }
 
         if(n == 1){
-            int size = strlen(argv[1]);
-            char comandoFinal[size];
-            strcpy(comandoFinal,argv[1]);
-            char * argumentos[2] = {comandoFinal,NULL}; 
-            execvp(comandoFinal,argumentos);
+            Command ** comandos = parsePipe(argv[1]);
+            if(fork() == 0){
+                execvp(comandos[0][0],comandos[0]);
+                perror("Nao executou a funcao corretamente");
+                _exit(-1);
+            }
+            wait(NULL);
+            freeCmdTok(comandos[0]);
             return -1;
         }
 
         if(n == 2){
-            Command * comandos = parseCmdTok(argv[1]);
+            Command ** comandos = parsePipe(argv[1]);
             int pd[2];
             pipe(pd);
             if(fork() == 0){
                 dup2(pd[1],STDOUT_FILENO);
                 close(pd[0]);
                 close(pd[1]);
-                execvp(comandos[0],&comandos[0]);
+                execvp(comandos[0][0],comandos[0]);
                 perror("Não executou corretamente");
                 _exit(-1);
             }
             dup2(pd[0],STDIN_FILENO);
             close(pd[0]);
             close(pd[1]);
-            execvp(comandos[1],&comandos[1]);
-            free(comandos[0]);
-            free(comandos[1]);
-            free(comandos);
+            execvp(comandos[1][0],comandos[1]);
+            freeCmdTok(comandos[0]);
+            freeCmdTok(comandos[1]);
             return 1;
         }
         if(n == 3){
-            Command * comandos = parseCmdTok(argv[1]);
+            Command ** comandos = parsePipe(argv[1]);
 
             int pid1[2];
             int pid2[2];
@@ -300,36 +218,48 @@ int main(int argc,char ** argv){
                 dup2(pid1[1],STDOUT_FILENO);
                 close(pid1[0]);
                 close(pid1[1]);
-                execvp(comandos[0],&comandos[0]);
+                close(pid2[0]);
+                close(pid2[1]);
+                execvp(comandos[0][0],comandos[0]);
                 perror("erro no comando 1");
                 _exit(-1);
-            }
-            if(fork() == 0){
+            }else{
+                //wait(NULL);
+                if(fork() == 0){
+                    dup2(pid1[0],STDIN_FILENO);
+                    close(pid1[0]);
+                    close(pid1[1]);
 
-                dup2(pid1[0],STDIN_FILENO);
-                close(pid1[0]);
-                close(pid1[1]);
+                    dup2(pid2[1],STDOUT_FILENO);
+                    close(pid2[0]);
+                    close(pid2[1]);
 
-                dup2(pid2[1],STDOUT_FILENO);
-                close(pid2[0]);
-                close(pid2[1]);
-
-                execvp(comandos[1],&comandos[1]);
-                perror("erro no comando 2");
-                _exit(-1);
+                    execvp(comandos[1][0],comandos[1]);
+                    perror("erro no comando 2");
+                    _exit(-1);
+                }else{
+                    //wait(NULL);
+                    if(fork() == 0){
+                        dup2(pid2[0],STDIN_FILENO);
+                        close(pid2[0]);
+                        close(pid2[1]);
+                        close(pid1[0]);
+                        close(pid1[1]);
+                        execvp(comandos[2][0],comandos[2]);
+                        perror("Erro no ultimo comando\n");
+                        _exit(-1);
+                    }else{
+                        wait(NULL);
+                        close(pid1[0]);
+                        close(pid1[1]);
+                        close(pid2[0]);
+                        close(pid2[1]);
+                        freeCmdTok(comandos[0]);
+                        freeCmdTok(comandos[1]);
+                        freeCmdTok(comandos[2]);
+                    }
+                }
             }
-            if(fork() == 0){
-                dup2(pid2[0],STDIN_FILENO);
-                close(pid2[0]);
-                close(pid2[1]);
-                execvp(comandos[2],&comandos[2]);
-                perror("Erro no ultimo comando\n");
-                _exit(-1);
-            }
-            wait(NULL);
-            wait(NULL);
-            wait(NULL);
-            freeCmdTok(comandos);
             return 0;
             
         }else{
@@ -342,4 +272,3 @@ int main(int argc,char ** argv){
 
     return 0;
 }
-*/
