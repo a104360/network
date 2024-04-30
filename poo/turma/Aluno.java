@@ -44,7 +44,7 @@ public class Aluno {
     }
     @Override
     public String toString() {
-        return "Aluno [numero=" + numero + ", nota=" + nota + ", nome=" + nome + ", curso=" + curso + "]";
+        return numero + ";" + nota + ";" + nome + ";" + curso + ";\n";
     }
     
     public boolean toEquals(Aluno a){

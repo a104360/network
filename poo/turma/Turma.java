@@ -4,7 +4,7 @@ public class Turma {
     private Aluno[] alunos;
     private int capacidade;
     private int ocupacao;
-    private static final int capacidadeInicial = 20;
+    private final int capacidadeInicial = 20;
 
 
     
@@ -29,9 +29,15 @@ public class Turma {
         this.ocupacao = ocupacao;
     }
 
-    //private Aluno[] getAlunos(){
-    //    return this.alunos;
-    //}
+    public Aluno[] getAlunos(){
+        Aluno[] alunosClonados = new Aluno[this.ocupacao];
+
+        for (int i = 0; i < this.ocupacao; i++) {
+            alunosClonados[i] = this.alunos[i].clone();   
+        }
+
+        return alunosClonados;
+    }
 
     public void insereAluno(Aluno a){
         this.alunos[this.ocupacao] = new Aluno(a.getNumero(),a.getNota(),a.getNome(),a.getCurso());
@@ -42,11 +48,20 @@ public class Turma {
         this.ocupacao++;
     }
 
+    public void printAlunos(){
+        for (int i = 0; i < this.ocupacao; i++) {
+            System.out.print(this.alunos[i]);
+        }
+    }
 
     public Turma(String designacao, int capacidade, int ocupacao, Aluno[] alunos) {
         this.designacao = designacao;
         this.capacidade = capacidade;
-        this.ocupacao = ocupacao;
+        this.ocupacao = alunos.length;
+        this.alunos = new Aluno[alunos.length];
+        for (int i = 0; i < alunos.length; i++) {
+            this.alunos[i] = alunos[i].clone();
+        }
     }
     public Turma() {
         this.designacao = "";
@@ -59,7 +74,6 @@ public class Turma {
         return "Turma [designacao=" + designacao + ", capacidade=" + capacidade + ", ocupacao=" + ocupacao
                 + ", capacidadeInicial=" + capacidadeInicial + "]";
     }
-    
     
     
 }
