@@ -1,4 +1,7 @@
-public class Aluno {
+
+import java.io.Serializable;
+
+public class Aluno implements Serializable{
     private String numero;
     public int nota;
     private String nome;

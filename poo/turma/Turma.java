@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Turma {
+public class Turma implements Serializable{
     private String designacao;
     private Aluno[] alunos;
     private int capacidade;

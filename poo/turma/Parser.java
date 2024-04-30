@@ -1,8 +1,9 @@
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Scanner;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class Parser {
     static private File hdd;
@@ -32,17 +33,35 @@ public class Parser {
     }
 
     public void saveTurma(Turma t) throws IOException{
-        try (FileWriter fw = new FileWriter(Parser.hdd)) {
+        try (FileOutputStream fos = new FileOutputStream("savefile");
+        ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            oos.writeObject(t);
+            oos.close();
+            fos.close();
+        } catch (IOException e) {
+            System.err.println("Algo correu mal");
+        }
+        /*try (FileWriter fw = new FileWriter(Parser.hdd)) {
             fw.write("Numero;Nota;Nome;Curso;\n");
             for(Aluno a : t.getAlunos()){
                 fw.write(a.toString());
             }
             fw.close();
-        }
+        }*/
     }
 
-    public Turma loadTurma() throws IOException,FileNotFoundException{
-        Aluno[] ff = new Aluno[4];
+    public Turma loadTurma() throws IOException,ClassNotFoundException{
+        try (FileInputStream file = new FileInputStream("savefile");
+        ObjectInputStream object = new ObjectInputStream(file);) {
+                Turma t = (Turma) object.readObject();
+                object.close();
+                file.close();
+                return t;
+        } catch (IOException e) {
+            System.err.println("erro humano");
+        }
+        return null;
+        /*Aluno[] ff = new Aluno[4];
         try (Scanner reader = new Scanner(Parser.hdd)) {
             reader.nextLine();
             int i = 0;
@@ -57,11 +76,12 @@ public class Parser {
         } catch (Exception e) {
             System.err.println("erro humano");
         }
-        return null;
+        return null;*/
     }
     
     public static void main(String[] args){
-        Parser p = new Parser("teste.csv");
+        Parser p = new Parser("binary");
+        
         /*
         Aluno a = new Aluno("1", 12, "antonio", "LEI");
         Aluno b = new Aluno("2", 13, "josefino", "LEI");
@@ -69,7 +89,22 @@ public class Parser {
         Aluno d = new Aluno("4", 15, "jose", "LEI");
         Aluno[] ff = {a,b,c,d};
         Turma t = new Turma("UMINHO", 5, 4,ff);
-        
+        try {
+            p.saveTurma(t);
+        } catch (IOException e) {
+            System.err.println("Erro humano");
+        }
+        */
+        try {
+            Turma t = p.loadTurma();
+            t.printAlunos();
+        } catch (IOException e) {
+            System.err.println("Erro humano");
+        } catch (ClassNotFoundException c){
+            System.err.println("class not found");
+        }
+
+        /*
         try{
             p.saveTurma(t);
         } catch (IOException e){
@@ -77,14 +112,16 @@ public class Parser {
         } catch (NullPointerException np) {
             System.err.println("NULL Pointer");
         }
-        */
         
+
+        // reader
         try {
             Turma t = p.loadTurma();
             t.printAlunos();
         } catch (IOException e) {
             System.err.println("erro humano");
         }
+        */
         
     }
 
