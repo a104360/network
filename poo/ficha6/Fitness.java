@@ -173,12 +173,16 @@ public class Fitness {
         throw new NoSuchMethodException();
     }
 
-    public Map<String, List<Utilizador>> podiumPorActiv(){
+    /*public Map<String, List<Utilizador>> podiumPorActiv(){
         Map<String,List<Utilizador>> podium = new HashMap<>();
         // Corrida 
         
         // Canoagem 
         // Abdominais
-    }
+    }*/
     
+
+
+
+
 }

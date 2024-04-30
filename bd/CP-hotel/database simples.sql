@@ -57,4 +57,21 @@ primary key (idFuncionario),
 foreign key (idHotel) references hotel(identificador)
 );
 
+create table if not exists reserva(
+idReserva int not null auto_increment,
+quarto int not null,
+cliente int not null,
+valor int not null,
+primary key (idReserva),
+foreign key (quarto) references quarto(num),
+foreign key (cliente) references cliente(contribuinte)
+);
+
+alter table reserva 
+	add dataReserva date;
+    
+    
+alter table quarto 
+	add lucro int;
+
 select * from funcionario;

@@ -1,7 +1,7 @@
-all: compile 
+all: compile
 
 compile: 
 	javac *.java
 
-clean: *.java
+clean: 
 	rm *.class

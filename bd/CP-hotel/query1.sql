@@ -37,7 +37,19 @@ INSERT INTO funcionario (nome , funcao , idHotel) values
 ('Josefino','Servidores','2'),
 ('Aristides','Faztudo','3');
 
--- select * from quarto;
+
+INSERT INTO reserva (quarto,cliente,valor) values 
+(1,1,1000),
+(1,2,2000),
+(2,3,5000);
+
+select * from quarto;
 -- update quarto set estado = 1 where idHotel = 3;
+
+select * from cliente;
+
+update reserva set dataReserva = '2002-12-2' where idReserva = 3;
+
+update quarto set lucro = 0 where num = 3;
 
 -- select cliente.nome,cliente.morada,contacto.valor from cliente inner join contacto on cliente.morada=contacto.idCliente
