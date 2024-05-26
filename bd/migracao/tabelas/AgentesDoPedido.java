@@ -15,7 +15,7 @@ public class AgentesDoPedido extends Entidade{
     
     @Override
     public String toString() {
-        return "AgenteDoPedido [idPedido=" + idPedido + ", idAgente=" + idAgente + "]";
+        return "(" + idPedido + "," + idAgente + ")";
     }
     
     public void load(String line){

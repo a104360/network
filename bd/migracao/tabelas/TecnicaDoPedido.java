@@ -11,7 +11,7 @@ public class TecnicaDoPedido extends Entidade {
 
     @Override
     public String toString() {
-        return "TecnicaDoPedido [idTecnica=" + idTecnica + ", idPedido=" + idPedido + "]";
+        return "(" + idTecnica + "," + idPedido + ")";
     }
 
     public void load(String line){

@@ -77,4 +77,146 @@ public class ReadCSV {
         TecnicaDoPedido b = new TecnicaDoPedido();
         this.table.put("TecnicaDoPedido",b.loadDB(path));
     }
+
+
+    public String getQueryAgencia(){
+        List<Entidade> list = this.table.get("Agencia");
+        String answer = "INSERT INTO Agencia (email,numero,porta,localidade,codigoPostal) VALUES ";
+        int size = list.size();
+        for(Entidade e : list){
+            Agencia a = (Agencia) e;
+            answer = answer + a.toString();
+            if(size-1 != 0) answer = answer + ",";
+            size--;
+        }
+        answer = answer + ";";
+        return answer;
+    }
+    
+    public String getQueryAgentesDoPedido(){
+        List<Entidade> list = this.table.get("AgentesDoPedido");
+        String answer = "INSERT INTO AgentesDoPedido (idPedido,idAgente) VALUES ";
+        int size = list.size();
+        for(Entidade e : list){
+            AgentesDoPedido a = (AgentesDoPedido) e;
+            answer = answer + a.toString();
+            if(size-1 != 0) answer = answer + ",";
+            size--;
+        }
+        answer = answer + ";";
+        return answer;
+    }
+    
+    public String getQueryCliente(){
+        List<Entidade> list = this.table.get("Cliente");
+        String answer = "INSERT INTO Cliente (nome, registoCriminal, NIF, porta, localidade, codigoPostal, numero, email) VALUES ";
+        int size = list.size();
+        for(Entidade e : list){
+            Cliente a = (Cliente) e;
+            answer = answer + a.toString();
+            if(size-1 != 0) answer = answer + ",";
+            size--;
+        }
+        answer = answer + ";";
+        return answer;
+    }
+    
+    public String getQueryFuncionario(){
+        List<Entidade> list = this.table.get("Funcionario");
+        String answer = "INSERT INTO Funcionario (nome, salario, inicioContrato, fimContrato, departamento, posicao, dataNascimento, porta, localidade, codigoPostal, numero, email, agencia) VALUES ";
+        int size = list.size();
+        for(Entidade e : list){
+            Funcionario a = (Funcionario) e;
+            answer = answer + a.toString();
+            if(size-1 != 0) answer = answer + ",";
+            size--;
+        }
+        answer = answer + ";";
+        return answer;
+    }
+    
+    public String getQueryLocalidade(){
+        List<Entidade> list = this.table.get("Localidade");
+        String answer = "INSERT INTO Localidade (nome) VALUES ";
+        int size = list.size();
+        for(Entidade e : list){
+            Localidade a = (Localidade) e;
+            answer = answer + a.toString();
+            if(size-1 != 0) answer = answer + ",";
+            size--;
+        }
+        answer = answer + ";";
+        return answer;
+    }
+    
+    public String getQueryPagamento(){
+        List<Entidade> list = this.table.get("Pagamento");
+        String answer = "INSERT INTO Pagamento (estado, valor, metodo, data) VALUES ";
+        int size = list.size();
+        for(Entidade e : list){
+            Pagamento a = (Pagamento) e;
+            answer = answer + a.toString();
+            if(size-1 != 0) answer = answer + ",";
+            size--;
+        }
+        answer = answer + ";";
+        return answer;
+    }
+    
+    public String getQueryPedido(){
+        List<Entidade> list = this.table.get("Pedido");
+        String answer = "INSERT INTO Pedido (nivel, tipo, custo, relatorio, status, inicio, fim, idPagamento, idCliente, idAgencia, idDespesa) VALUES ";
+        int size = list.size();
+        for(Entidade e : list){
+            Pedido a = (Pedido) e;
+            answer = answer + a.toString();
+            if(size-1 != 0) answer = answer + ",";
+            size--;
+        }
+        answer = answer + ";";
+        return answer;
+    }
+    
+    public String getQueryTecnica(){
+        List<Entidade> list = this.table.get("Tecnica");
+        String answer = "INSERT INTO Tecnica (nome) VALUES ";
+        int size = list.size();
+        for(Entidade e : list){
+            Tecnica a = (Tecnica) e;
+            answer = answer + a.toString();
+            if(size-1 != 0) answer = answer + ",";
+            size--;
+        }
+        answer = answer + ";";
+        return answer;
+    }
+    
+    public String getQueryTecnicaDoPedido(){
+        List<Entidade> list = this.table.get("TecnicaDoPedido");
+        String answer = "INSERT INTO TecnicaDoPedido (pedido,tecnica) VALUES ";
+        int size = list.size();
+        for(Entidade e : list){
+            TecnicaDoPedido a = (TecnicaDoPedido) e;
+            answer = answer + a.toString();
+            if(size-1 != 0) answer = answer + ",";
+            size--;
+        }
+        answer = answer + ";";
+        return answer;
+    }
+    
+    public String getQueryDespesa(){
+        List<Entidade> list = this.table.get("Despesa");
+        String answer = "INSERT INTO Despesa (bonus, alimentacao, alojamento, equipamento, outros) VALUES ";
+        int size = list.size();
+        for(Entidade e : list){
+            Despesa a = (Despesa) e;
+            answer = answer + a.toString();
+            if(size-1 != 0) answer = answer + ",";
+            size--;
+        }
+        answer = answer + ";";
+        return answer;
+    }
+    
 }

@@ -25,8 +25,8 @@ public class Despesa extends Entidade{
     
     @Override
     public String toString() {
-        return "Despesa [bonus=" + bonus + ", alimentacao=" + alimentacao + ", alojamento=" + alojamento
-        + ", equipamento=" + equipamento + ", outros=" + outros + "]";
+        return "(" + bonus + "," + alimentacao + "," + alojamento
+        + "," + equipamento + "," + outros + ")";
     }
     
     public void load(String line){

@@ -46,9 +46,30 @@ public class Pedido extends Entidade{
     
     @Override
     public String toString() {
-        return "Pedido [nivel=" + nivel + ", tipo=" + tipo + ", relatorio="
-        + relatorio + ", status=" + status + ", inicio=" + inicio + ", fim=" + fim + ", pagamento=" + pagamento
-        + ", cliente=" + cliente + ", agencia=" + agencia + ", despesa=" + this.despesa + "]";
+        String answer = "(";
+
+        if(this.nivel == null){
+            answer += "NULL,";
+        } else {
+            answer += "'" + this.nivel + "',";
+        }
+
+        if(this.tipo == null){
+            answer += "NULL,";
+        } else {
+            answer += "'" + this.tipo + "'";
+        }
+        
+        answer += ",'"+ relatorio + "'," + status + ",'" + inicio + "'";
+
+        if(this.fim == null){
+            answer += "NULL,";
+        } else {
+            answer += "'" + this.fim + "'";
+        }
+
+        answer += "," + pagamento + "," + cliente + "," + agencia + "," + this.despesa + ")";
+        return answer; 
     }
     
     public void load(String line){

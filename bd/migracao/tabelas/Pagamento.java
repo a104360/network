@@ -3,6 +3,7 @@ package tabelas;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.text.DecimalFormat;
 
 public class Pagamento extends Entidade{
     private boolean estado;
@@ -28,8 +29,9 @@ public class Pagamento extends Entidade{
     
     @Override
     public String toString() {
-        return "Pagamento [estado=" + estado + ", valor=" + valor + ", metodo=" + metodo + ", data="
-        + data + "]";
+        DecimalFormat df = new DecimalFormat("0.00");
+        return "(" + estado + "," + df.format(this.valor) + "," + metodo + ",'"
+        + data + "')";
     }
     
     public void load(String line){

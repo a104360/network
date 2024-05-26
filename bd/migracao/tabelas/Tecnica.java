@@ -13,7 +13,7 @@ public class Tecnica extends Entidade{
     
     @Override
     public String toString() {
-        return "Tecnica [nome=" + this.nome+ "]";
+        return "('" + this.nome+ "')";
     }
     
     public void load(String line){

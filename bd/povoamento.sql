@@ -65,7 +65,7 @@ INSERT INTO Tecnica (nome) VALUES
 ('Verificação de Alibis');
 
 -- Exemplos para a tabela TecnicaDaInvestigacao
-INSERT INTO TecnicaDaInvestigacao (pedido, tecnica) VALUES 
+INSERT INTO TecnicaDoPedido (pedido, tecnica) VALUES 
 (1, 1),
 (1, 2),
 (1, 4),

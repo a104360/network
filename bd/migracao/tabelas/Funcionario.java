@@ -3,6 +3,7 @@ package tabelas;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.text.DecimalFormat;
 
 public class Funcionario extends Entidade{
     private String nome;
@@ -57,11 +58,20 @@ public class Funcionario extends Entidade{
     
     @Override
     public String toString() {
-        return "Funcionario [nome=" + nome + ", salario=" + salario + ", inicioContrato="
-        + inicioContrato + ", fimContrato=" + fimContrato + ", departamento=" + departamento + ", posicao="
-        + posicao + ", dataNascimento=" + dataNascimento + ", porta=" + porta + ", localidade=" + localidade
-        + ", codigoPostal=" + codigoPostal + ", numero=" + numero + ", email=" + email + ", agencia=" + agencia
-        + "]";
+        DecimalFormat df = new DecimalFormat("0.00");
+        String answer = "('" + nome + "'," + df.format(this.salario) + ",'"
+        + inicioContrato + "',";
+        
+        if(this.fimContrato == null){
+            answer = answer + "NULL,";
+        } else {
+            answer = answer + "'" + this.fimContrato + "',";
+        }
+    
+        answer += "'" + posicao + "','" + dataNascimento + "'," + porta + "," + localidade
+        + "," + codigoPostal + "," + numero + ",'" + email + "'," + agencia
+        + ")";
+        return answer;
     }
     
     public void load(String line){

@@ -29,8 +29,8 @@ public class Agencia extends Entidade{
     
     @Override
     public String toString() {
-        return "Agencia [email=" + email + ", numero=" + numero + ", porta=" + porta + ", localidade="
-        + localidade + ", codigoPostal=" + codigoPostal + "]";
+        return "('" + email + "'," + numero + "," + porta + ","
+        + localidade + "," + codigoPostal + ")";
     }
     
     public void load(String line){

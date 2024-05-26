@@ -15,4 +15,4 @@ tabelas/%.class: tabelas/%.java
 	$(CC) -d tabelas $<
 
 clean:
-	rm -f ./*.class
+	rm -f ./*.class ./tabelas/*.class

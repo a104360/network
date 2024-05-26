@@ -38,9 +38,9 @@ public class Cliente extends Entidade{
     
     @Override
     public String toString() {
-        return "Cliente [nome=" + nome + ", registoCriminal=" + registoCriminal + ", nif=" + nif
-        + ", porta=" + porta + ", localidade=" + localidade + ", codigoPostal=" + codigoPostal + ", numero="
-        + numero + ", email=" + email + "]";
+        return "('" + nome + "','" + registoCriminal + "'," + nif
+        + "," + porta + "," + localidade + "," + codigoPostal + ","
+        + numero + ",'" + email + "')";
     }
     
     public void load(String line){

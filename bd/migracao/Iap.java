@@ -5,6 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.List;
+
+import tabelas.Entidade;
 
 
 public class Iap{
@@ -28,7 +31,7 @@ public class Iap{
 
         ReadCSV databases = new ReadCSV(Iap.paths);
 
-        //System.out.println(databases.table.get("Funcionario"));
+        
 
         a.closeConnection();
     }
@@ -56,6 +59,16 @@ public class Iap{
             System.err.println(a);
         }
     }
+
+    private static String formulateQuery(ReadCSV r,String nome){
+        String inicio = "INSERT INTO ";
+        inicio = inicio + nome;
+        List<Entidade> list = r.table.get(nome);
+        for(Entidade e : list){
+            
+        }
+    }
+
     ResultSet query(String query){
         try {
             ResultSet r = this.stmt.executeQuery(query);

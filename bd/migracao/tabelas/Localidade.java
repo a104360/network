@@ -14,7 +14,7 @@ public class Localidade extends Entidade{
 
     @Override
     public String toString() {
-        return "Localidade [nome=" + nome + "]";
+        return "('" + nome + "')";
     }
 
     public void load(String line){

@@ -88,4 +88,31 @@ public class ReadCSVTest {
         ReadCSV r = new ReadCSV(paths);
         System.out.println(r.table.get("AgenteDoPedido").toString());
     }
+    
+    @Test 
+    void testGetQueryAgencia(){
+        String[] paths = {
+            "/home/retr0/Downloads/PovoamentoCsv/Agencia.csv",
+            "/home/retr0/Downloads/PovoamentoCsv/AgentesDoPedido.csv",
+            "/home/retr0/Downloads/PovoamentoCsv/Cliente.csv",
+            "/home/retr0/Downloads/PovoamentoCsv/Despesa.csv",
+            "/home/retr0/Downloads/PovoamentoCsv/Funcionario.csv",
+            "/home/retr0/Downloads/PovoamentoCsv/Localidade.csv",
+            "/home/retr0/Downloads/PovoamentoCsv/Pagamento.csv",
+            "/home/retr0/Downloads/PovoamentoCsv/Pedido.csv",
+            "/home/retr0/Downloads/PovoamentoCsv/Tecnica.csv",
+            "/home/retr0/Downloads/PovoamentoCsv/TecnicaDoPedido.csv"
+        };
+        ReadCSV r = new ReadCSV(paths);
+        //System.out.println(r.getQueryAgencia());
+        //System.out.println(r.getQueryAgentesDoPedido());
+        //System.out.println(r.getQueryCliente());
+        //System.out.println(r.getQueryFuncionario());
+        //System.out.println(r.getQueryLocalidade());
+        //System.out.println(r.getQueryPagamento());
+        //System.out.println(r.getQueryPedido());
+        System.out.println(r.getQueryTecnica());
+        System.out.println(r.getQueryTecnicaDoPedido());
+        System.out.println(r.getQueryDespesa());
+    }
 }
