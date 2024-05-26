@@ -1,20 +1,27 @@
 package tabelas;
 
-public class Localidade{
-    private int id;
+public class Localidade extends Entidade{
     private String nome;
 
+    public Localidade() {
+        this.nome = null;
+    }
     
-    public Localidade(int id, String nome) {
-        this.id = id;
+    public Localidade(String nome) {
         this.nome = nome;
     }
 
 
     @Override
     public String toString() {
-        return "Localidade [id=" + id + ", nome=" + nome + "]";
+        return "Localidade [nome=" + nome + "]";
     }
 
-    
+    public void load(String line){
+        this.nome = line;
+    }    
+
+    public Entidade createInstance(){
+        return new Localidade();
+    }
 }

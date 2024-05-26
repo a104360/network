@@ -1,0 +1,5 @@
+nivel,tipo,custo,relatorio,status,inicio,fim,idPagamento,idCliente,idAgencia,idDespesa
+Regional,Investigação,Relatório completo,1,2024-02-01,2024-02-28,1,1,1,1
+Regional,Monitorização,Relatório parcial,0,2024-03-01,2024-03-20,2,2,1,2
+Local,Investigação,Relatório consultoria,1,2024-04-01,2024-04-15,3,3,1,3
+Nacional,Investigação,Relatório final,1,2024-05-01,2024-05-30,4,4,1,4

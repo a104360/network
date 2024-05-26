@@ -1,0 +1,6 @@
+nome,salario,inicioContrato,fimContrato,departamento,posicao,dataNascimento,porta,localidade,codigoPostal,numero,email,agencia
+Aristides Piratininga,2500.00,2022-05-20,,Administração,CEO,1986-12-01,13,3,4730301,910934415,aristides.obi@investigacao.pt,1
+Laura Hipólito,2500.00,2022-05-25,,Equipa jurídica,Advogada,2000-04-25,34,6,4730203,664115266,hipolito@investigacao.pt,1
+João Freitas,2450.00,2022-06-14,,Finanças,Gestor Sénior,2003-11-15,56,3,4715001,967566234,joao.freitas@investigacao.pt,1
+Maria Costa,700.00,2024-01-15,,Investigação,Agente júnior,1999-03-30,78,3,4720313,913141250,maria.costa@investigacao.pt,1
+Marco Costa,700.00,2024-01-15,,Investigação,Agente júnior,2004-10-10,3,3,4702712,917771322,marco.tosta@investigacao.pt,1

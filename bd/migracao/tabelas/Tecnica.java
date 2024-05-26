@@ -1,17 +1,27 @@
 package tabelas;
 
-public class Tecnica {
-    private int id;
-    private int pedido;
+public class Tecnica extends Entidade{
+    private String nome;
 
-    public Tecnica(int id, int pedido) {
-        this.id = id;
-        this.pedido = pedido;
+    public Tecnica(){
+        this.nome = null;
     }
 
+    public Tecnica(String nome) {
+        this.nome = nome;
+    }
+    
     @Override
     public String toString() {
-        return "Tecnica [id=" + id + ", pedido=" + pedido + "]";
+        return "Tecnica [nome=" + this.nome+ "]";
+    }
+    
+    public void load(String line){
+        this.nome = line;
+    }
+
+    public Entidade createInstance(){
+        return new Tecnica();
     }
 
 }

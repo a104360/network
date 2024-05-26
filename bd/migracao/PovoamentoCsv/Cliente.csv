@@ -1,0 +1,5 @@
+nome,registoCriminal,NIF,porta,localidade,codigoPostal,numero,email
+Carlos Almeida,Sem registo,123456789,5,1,1100,987654321,carlos.almeida@cliente.pt
+Sofia Carvalho,Sem registo,987654321,15,2,4100,876543210,sofia.carvalho@cliente.pt
+Rui Martins,Registo de pequeno delito,112233445,25,3,8000,765432109,rui.martins@cliente.pt
+Beatriz Oliveira,Sem registo,556677889,35,4,3000,654321098,beatriz.oliveira@cliente.pt

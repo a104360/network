@@ -11,6 +11,16 @@ data date not null,
 primary key (idPagamento)
 );
 
+create table if not exists Despesa(
+idDespesa int not null auto_increment,
+bonus int not null,
+alimentacao int not null,
+alojamento int not null,
+equipamento int not null,
+outros int not null,
+primary key (idDespesa)
+);
+
 create table if not exists Localidade(
 	idLocalidade int not null auto_increment,
     nome varchar(45),
@@ -74,10 +84,12 @@ create table if not exists Pedido (
     idPagamento int not null,
     idCliente int not null,
     idAgencia int not null,
+    idDespesa int not null,
     primary key (idPedido),
     foreign key (idPagamento) references Pagamento(idPagamento),
     foreign key (idCliente) references Cliente(idCliente),
-    foreign key (idAgencia) references Agencia(idAgencia)
+    foreign key (idAgencia) references Agencia(idAgencia),
+    foreign key (idDespesa) references Despesa(idDespesa)
 );
 
 create table if not exists AgentesDoPedido (
@@ -90,7 +102,14 @@ create table if not exists AgentesDoPedido (
 
 create table if not exists Tecnica (
 	idTecnica int not null auto_increment,
-    idPedido int not null,
-    primary key (idTecnica),
-    foreign key (idPedido) references Pedido(idPedido)
+    nome varchar(45) not null,
+    primary key (idTecnica)
+);
+
+create table if not exists TecnicaDaInvestigacao (
+	pedido int not null,
+	tecnica int not null,
+    primary key (tecnica,pedido),
+    foreign key (pedido) references Pedido(idPedido),
+    foreign key (tecnica) references Tecnica(idTecnica)
 );

@@ -6,14 +6,29 @@ import java.sql.SQLException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
+
 public class Iap{
     private Connection con;
     private Statement stmt;
+    private static final String[] paths = {
+        "PovoamentoCsv/Agencia.csv",
+        "PovoamentoCsv/AgentesDoPedido.csv",
+        "PovoamentoCsv/Cliente.csv",
+        "PovoamentoCsv/Despesa.csv",
+        "PovoamentoCsv/Funcionario.csv",
+        "PovoamentoCsv/Localidade.csv",
+        "PovoamentoCsv/Pagamento.csv",
+        "PovoamentoCsv/Pedido.csv",
+        "PovoamentoCsv/Tecnica.csv",
+        "PovoamentoCsv/TecnicaDoPedido.csv"
+    };
     public static void main(String[] args){
         Iap a = new Iap();
         a.createConnection(args[0], args[1]);
 
+        ReadCSV databases = new ReadCSV(Iap.paths);
 
+        //System.out.println(databases.table.get("Funcionario"));
 
         a.closeConnection();
     }
