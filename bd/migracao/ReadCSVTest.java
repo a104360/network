@@ -104,15 +104,15 @@ public class ReadCSVTest {
             "/home/retr0/Downloads/PovoamentoCsv/TecnicaDoPedido.csv"
         };
         ReadCSV r = new ReadCSV(paths);
-        //System.out.println(r.getQueryAgencia());
-        //System.out.println(r.getQueryAgentesDoPedido());
-        //System.out.println(r.getQueryCliente());
-        //System.out.println(r.getQueryFuncionario());
-        //System.out.println(r.getQueryLocalidade());
-        //System.out.println(r.getQueryPagamento());
-        //System.out.println(r.getQueryPedido());
+        System.out.println(r.getQueryPagamento());
+        System.out.println(r.getQueryDespesa());
+        System.out.println(r.getQueryLocalidade());
+        System.out.println(r.getQueryAgencia());
+        System.out.println(r.getQueryFuncionario());
+        System.out.println(r.getQueryCliente());
+        System.out.println(r.getQueryPedido());
+        System.out.println(r.getQueryAgentesDoPedido());
         System.out.println(r.getQueryTecnica());
         System.out.println(r.getQueryTecnicaDoPedido());
-        System.out.println(r.getQueryDespesa());
     }
 }

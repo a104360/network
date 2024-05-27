@@ -60,7 +60,7 @@ public class Pedido extends Entidade{
             answer += "'" + this.tipo + "'";
         }
         
-        answer += ",'"+ relatorio + "'," + status + ",'" + inicio + "'";
+        answer += ",'"+ relatorio + "'," + status + ",'" + inicio + "',";
 
         if(this.fim == null){
             answer += "NULL,";

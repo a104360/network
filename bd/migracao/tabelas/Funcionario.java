@@ -68,7 +68,7 @@ public class Funcionario extends Entidade{
             answer = answer + "'" + this.fimContrato + "',";
         }
     
-        answer += "'" + posicao + "','" + dataNascimento + "'," + porta + "," + localidade
+        answer += "'" + this.departamento + "','" + posicao + "','" + dataNascimento + "'," + porta + "," + localidade
         + "," + codigoPostal + "," + numero + ",'" + email + "'," + agencia
         + ")";
         return answer;

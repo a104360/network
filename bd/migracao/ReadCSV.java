@@ -165,7 +165,7 @@ public class ReadCSV {
     
     public String getQueryPedido(){
         List<Entidade> list = this.table.get("Pedido");
-        String answer = "INSERT INTO Pedido (nivel, tipo, custo, relatorio, status, inicio, fim, idPagamento, idCliente, idAgencia, idDespesa) VALUES ";
+        String answer = "INSERT INTO Pedido (nivel, tipo, relatorio, status, inicio, fim, idPagamento, idCliente, idAgencia, idDespesa) VALUES ";
         int size = list.size();
         for(Entidade e : list){
             Pedido a = (Pedido) e;

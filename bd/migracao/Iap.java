@@ -1,6 +1,7 @@
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Logger;
@@ -30,8 +31,16 @@ public class Iap{
         a.createConnection(args[0], args[1]);
 
         ReadCSV databases = new ReadCSV(Iap.paths);
-
-        
+        a.query(databases.getQueryPagamento());
+        a.query(databases.getQueryDespesa());
+        a.query(databases.getQueryLocalidade());
+        a.query(databases.getQueryAgencia());
+        a.query(databases.getQueryFuncionario());
+        a.query(databases.getQueryCliente());
+        a.query(databases.getQueryPedido());
+        a.query(databases.getQueryAgentesDoPedido());
+        a.query(databases.getQueryTecnica());
+        a.query(databases.getQueryTecnicaDoPedido());
 
         a.closeConnection();
     }
@@ -60,23 +69,12 @@ public class Iap{
         }
     }
 
-    private static String formulateQuery(ReadCSV r,String nome){
-        String inicio = "INSERT INTO ";
-        inicio = inicio + nome;
-        List<Entidade> list = r.table.get(nome);
-        for(Entidade e : list){
-            
-        }
-    }
-
-    ResultSet query(String query){
+    void query(String query){
         try {
-            ResultSet r = this.stmt.executeQuery(query);
-            
-            return r;
+            System.out.println(this.stmt.executeUpdate(query));
         } catch (SQLException e) {
             System.err.println("Query inválida!");
-            return null;
+            System.err.println(e);
         }
     }
 }
