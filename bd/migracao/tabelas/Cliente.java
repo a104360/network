@@ -38,9 +38,15 @@ public class Cliente extends Entidade{
     
     @Override
     public String toString() {
-        return "('" + nome + "','" + registoCriminal + "'," + nif
-        + "," + porta + "," + localidade + "," + codigoPostal + ","
+        String answer = "('" + nome + "',";
+        if(this.registoCriminal == null){
+            answer += "NULL,";
+        } else {
+            answer += "'" + this.registoCriminal + "',";
+        }
+         answer += nif + "," + porta + "," + localidade + "," + codigoPostal + ","
         + numero + ",'" + email + "')";
+        return answer;
     }
     
     public void load(String line){

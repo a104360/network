@@ -63,7 +63,7 @@ public class Pedido extends Entidade{
         answer += ",'"+ relatorio + "'," + status + ",'" + inicio + "',";
 
         if(this.fim == null){
-            answer += "NULL,";
+            answer += "NULL";
         } else {
             answer += "'" + this.fim + "'";
         }
@@ -80,7 +80,7 @@ public class Pedido extends Entidade{
         this.status = Integer.parseInt(values[3]);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.inicio = Date.valueOf(LocalDate.parse(values[4],formatter));
-        this.fim = Date.valueOf(LocalDate.parse(values[5],formatter));
+        if(values[5].compareTo("") != 0) this.fim = Date.valueOf(LocalDate.parse(values[5],formatter));
         this.pagamento = Integer.parseInt(values[6]);
         this.cliente = Integer.parseInt(values[7]);
         this.agencia = Integer.parseInt(values[8]);

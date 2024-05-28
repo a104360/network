@@ -1,6 +1,13 @@
 nome,salario,inicioContrato,fimContrato,departamento,posicao,dataNascimento,porta,localidade,codigoPostal,numero,email,agencia
 Aristides Piratininga,2500.00,2022-05-20,,Administração,CEO,1986-12-01,13,3,4730301,910934415,aristides.obi@investigacao.pt,1
-Laura Hipólito,2500.00,2022-05-25,,Equipa jurídica,Advogada,2000-04-25,34,6,4730203,664115266,hipolito@investigacao.pt,1
-João Freitas,2450.00,2022-06-14,,Finanças,Gestor Sénior,2003-11-15,56,3,4715001,967566234,joao.freitas@investigacao.pt,1
-Maria Costa,700.00,2024-01-15,,Investigação,Agente júnior,1999-03-30,78,3,4720313,913141250,maria.costa@investigacao.pt,1
-Marco Costa,700.00,2024-01-15,,Investigação,Agente júnior,2004-10-10,3,3,4702712,917771322,marco.tosta@investigacao.pt,1
+Laura Hipólito,2500.00,2022-05-25,,Equipajurídica,Advogada,2000-04-25,34,6,4730203,664115266,hipolito@investigacao.pt,1
+João Freitas,2450.00,2022-06-14,,Finanças,GestorSénior,2003-11-15,56,2,4715001,967566234,joao.freitas@investigacao.pt,1
+Maria Costa,700.00,2024-01-15,,Investigação,Agentesénior,1999-03-30,78,4,4720313,913141250,maria.costa@investigacao.pt,1
+Marco Costa,700.00,2024-01-15,,Investigação,Agentejúnior,2004-10-10,3,5,4702712,917771322,marco.tosta@investigacao.pt,1
+Ana Silva,1500.00,2023-01-10,2024-01-10,Finanças,Contabilista,1980-07-22,45,1,4725301,912345678,ana.silva@investigacao.pt,2
+Rui Dias,1300.00,2023-02-01,2024-02-01,Finanças,AssistenteFinanceiro,1992-02-13,50,2,4720302,912345679,rui.dias@investigacao.pt,1
+Inês Marques,900.00,2023-03-01,,Investigação,Agente,1995-05-10,21,3,4710303,912345680,ines.marques@investigacao.pt,2
+Pedro Almeida,950.00,2023-04-15,2024-04-15,Investigação,Agente,1998-08-22,15,1,4705311,912345681,pedro.almeida@investigacao.pt,2
+Sara Fernandes,1200.00,2023-06-10,,Equipajurídica,Advogadajúnior,1997-12-05,30,1,4720402,912345682,sara.fernandes@investigacao.pt,2
+Luís Gomes,1300.00,2023-07-01,2024-07-01,Finanças,Analista,1990-10-14,25,4,4710304,912345683,luis.gomes@investigacao.pt,2
+Beatriz Silva,1400.00,2023-08-05,,Administração,Assistente,1985-11-20,18,5,4725302,912345684,beatriz.silva@investigacao.pt,2

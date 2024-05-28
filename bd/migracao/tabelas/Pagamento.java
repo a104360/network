@@ -30,8 +30,14 @@ public class Pagamento extends Entidade{
     @Override
     public String toString() {
         DecimalFormat df = new DecimalFormat("0.00");
-        return "(" + estado + "," + df.format(this.valor) + "," + metodo + ",'"
-        + data + "')";
+        String answer = "(" + estado + "," + df.format(this.valor) + "," + metodo + ",";
+        if(this.data == null){
+            answer += "NULL";
+        } else {
+            answer += "'" + this.data + "'";
+        }
+        answer += ")";
+        return answer;
     }
     
     public void load(String line){
@@ -39,8 +45,10 @@ public class Pagamento extends Entidade{
         this.estado = Boolean.parseBoolean(values[0]);
         this.valor = Double.parseDouble(values[1]);
         this.metodo = Integer.parseInt(values[2]);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        this.data = Date.valueOf(LocalDate.parse(values[3],formatter));
+        if(values.length == 4){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            this.data = Date.valueOf(LocalDate.parse(values[3],formatter));
+        }
     }    
     public Entidade createInstance(){
         return new Pagamento();
